@@ -1,22 +1,15 @@
 package com.vestuario.alugel.Models;
 
+import com.vestuario.alugel.Enums.Perfil;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
-
-import org.hibernate.annotations.Type;
-
-import com.vestuario.alugel.Models.roles.UtilizadorROLE;
-
-import io.hypersistence.utils.hibernate.type.array.ListArrayType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+@Data
 @Entity
 @Table(name = "utilizador")
 public class Utilizador {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_utilizador;
@@ -30,11 +23,12 @@ public class Utilizador {
     @Column(nullable = false)
     private String senha;
 
-    @Type(ListArrayType.class)
-    @Column(name = "perfis",columnDefinition = "varchar[]")
-    private List<UtilizadorROLE> perfis;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "utilizador_perfis", joinColumns = @JoinColumn(name = "utilizador_id"))
+    @Column(name = "perfil")
+    private List<Perfil> perfis;
+
     @Column
     private String telefone;
-
-
 }

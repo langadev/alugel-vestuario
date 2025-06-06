@@ -4,6 +4,24 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+## Ignorar arquivos específicos do modelo
+/src/models/ItemVestuario.java
+/src/models/UtilizadorPrincipal.java
+
+## Ignorar pacotes específicos
+/src/exceptions/
+/src/configs/
+/src/security/
+/src/enums/
+/src/Repositories/ItemVestuarioRepository.java
+/src/Repositories/ReservaRepository.java
+
+
+
+
+
+
+
 ### STS ###
 .apt_generated
 .classpath
